@@ -1,0 +1,53 @@
+﻿using CommunityToolkit.Mvvm.Input;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using WSCalendar.Models;
+using WSCalendar.Services;
+
+namespace WSCalendar.ViewModels
+{
+    [QueryProperty(nameof(TaskDetail), "TaskDetail")]
+    public partial class AddUpdateTaskDetailsViewModel : ObservableObject
+    {
+        [ObservableProperty]
+        private TaskReminder _taskDetail = new TaskReminder();
+
+        private readonly ICalendarService _calendarService;
+        public AddUpdateTaskDetailsViewModel(ICalendarService calendarService)
+        {
+            _calendarService = calendarService;
+        }
+
+        [RelayCommand]
+        public async void AddUpdateTask()
+        {
+            int response = -1;
+            if (TaskDetail.Id > 0)
+            {
+                response = await _calendarService.UpdateTask(TaskDetail);
+            }
+            else
+            {
+                response = await _calendarService.AddTask(new Models.TaskReminder
+                {
+                    Title = TaskDetail.Title,
+                    Description = TaskDetail.Description,
+                    TaskLocation = TaskDetail.TaskLocation,
+                    TaskCreated = DateTime.Now,
+                });
+            }
+
+            if (response > 0)
+            {
+                await Shell.Current.DisplayAlert("Task Added", "Record Added to Task List", "Ok");
+            }
+            else
+            {
+                await Shell.Current.DisplayAlert("Error!", "Something went wrong while Adding to task tist", "Ok");
+            }
+        }
+    }
+}
