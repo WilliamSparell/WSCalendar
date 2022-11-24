@@ -13,7 +13,7 @@ namespace WSCalendar.ViewModels
     public partial class AddUpdateTaskDetailsViewModel : ObservableObject
     {
         [ObservableProperty]
-        private TaskReminder _taskDetail = new TaskReminder();
+        private TaskReminder _taskDetail = new();
 
         private readonly ICalendarService _calendarService;
         public AddUpdateTaskDetailsViewModel(ICalendarService calendarService)
@@ -24,7 +24,7 @@ namespace WSCalendar.ViewModels
         [RelayCommand]
         public async void AddUpdateTask()
         {
-            int response = -1;
+            int response;
             if (TaskDetail.Id > 0)
             {
                 response = await _calendarService.UpdateTask(TaskDetail);
@@ -35,8 +35,7 @@ namespace WSCalendar.ViewModels
                 {
                     Title = TaskDetail.Title,
                     Description = TaskDetail.Description,
-                    TaskLocation = TaskDetail.TaskLocation,
-                    TaskCreated = DateTime.Now,
+                    TaskLocation = TaskDetail.TaskLocation
                 });
             }
 

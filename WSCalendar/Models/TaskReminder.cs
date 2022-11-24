@@ -13,7 +13,7 @@ namespace WSCalendar.Models
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public DateTime TaskCreated { get; set; }
+        //public DateTime TaskCreated { get; set; }
         //public DateTime Date { get; set; }
         public string TaskLocation { get; set; }
     }

@@ -6,35 +6,38 @@
              x:DataType="viewModels:TaskListPageViewModel"
              x:Class="WSCalendar.Views.TaskListPage"
              Title="Task List">
-    <VerticalStackLayout>
-        <Label Text="Tasks" 
+    
+    <StackLayout>
+        <VerticalStackLayout Margin=" 10"
+                             Padding="10">
+            <Label Text="Tasks" 
                FontSize="28"
                VerticalOptions="Center"
                HorizontalOptions="Center"/>
 
-        <CollectionView>
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:TaskReminder">
-                    <Frame Margin=" 10"
-                           Padding="10">
-                        <StackLayout>
-                            <HorizontalStackLayout Spacing="15">
-                                <Label Text="{Binding Title}" FontSize="17" FontAttributes="Bold"/>
-                                <Label Text="{Binding TaskLocation}" FontSize="17" FontAttributes="Bold"/>
-                                <Label Text="{Binding Description}" FontSize="17" FontAttributes="Bold"/>
-                                <Label Text="{Binding TaskCreated}" FontSize="17" FontAttributes="Bold"/>
-                            </HorizontalStackLayout>
-                        </StackLayout>
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewModels:TaskListPageViewModel}},Path=DisplayActionCommand}"
-                                                  CommandParameter="{Binding .}" />
-                        </Frame.GestureRecognizers>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-        <Button Text="Add Task"
-                Command="{Binding AddUpdateTaskCommand}"
-                HorizontalOptions="FillAndExpand"/>
-    </VerticalStackLayout>
+            <CollectionView ItemsSource="{Binding Tasks}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:TaskReminder">
+                        <Frame >
+                            <StackLayout>
+                                <HorizontalStackLayout Spacing="15">
+                                    <Label Text="{Binding Title}" FontSize="17" FontAttributes="Bold"/>
+                                    <Label Text="{Binding TaskLocation}" FontSize="17" FontAttributes="Bold"/>
+                                    <Label Text="{Binding Description}" FontSize="17" FontAttributes="Bold"/>
+                                </HorizontalStackLayout>
+                            </StackLayout>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewModels:TaskListPageViewModel}},Path=DisplayActionCommand}"
+                                                      CommandParameter="{Binding .}" />
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Button Text="Add Task"
+                    Command="{Binding AddUpdateTaskCommand}"
+                    FontSize="17" 
+                    FontAttributes="Bold"/>
+        </VerticalStackLayout>
+    </StackLayout>
 </ContentPage>

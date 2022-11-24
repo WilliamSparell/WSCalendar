@@ -12,7 +12,8 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     
-    <StackLayout Margin="10">
+    <StackLayout Margin="10"
+                 Spacing="15">
         <VerticalStackLayout>
             <Label Text="Title" />
             <Entry Text="{Binding TaskDetail.Title}"
