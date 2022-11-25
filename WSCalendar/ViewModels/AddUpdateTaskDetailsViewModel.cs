@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,7 +36,9 @@ namespace WSCalendar.ViewModels
                 {
                     Title = TaskDetail.Title,
                     Description = TaskDetail.Description,
-                    TaskLocation = TaskDetail.TaskLocation
+                    TaskLocation = TaskDetail.TaskLocation,
+                    Date = TaskDetail.Date,
+                    Time = TaskDetail.Time
                 });
             }
 
@@ -47,6 +50,7 @@ namespace WSCalendar.ViewModels
             {
                 await Shell.Current.DisplayAlert("Error!", "Something went wrong while Adding to task tist", "Ok");
             }
+
         }
     }
 }

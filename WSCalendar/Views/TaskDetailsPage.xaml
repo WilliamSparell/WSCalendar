@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WSCalendar.Views.TaskDetailsPage"
+             Title="{Binding TaskDetail.Date}">
+    <ScrollView>
+        <Grid RowDefinitions="Auto,Auto,*">
+
+            <Label Style="{StaticResource LargeLabel}" 
+               Grid.Row="1"
+               TextColor="White"
+               FontAttributes="Bold"
+               Text="{Binding TaskDetail.Title}" 
+               HorizontalOptions="Center"
+               Margin="0,0,0,8"/>
+
+            <VerticalStackLayout Grid.Row="2" Padding="10" Spacing="10">
+                <Label Style="{StaticResource LargeLabel}" Text="{Binding TaskDetail.Description}" />
+                <Label Style="{StaticResource MediumLabel}" Text="{Binding TaskDetail.TaskLocation, StringFormat='Location: {0}'}" />
+                <Label Style="{StaticResource MediumLabel}" Text="{Binding TaskDetail.Date, StringFormat='Date: {0}'}" />
+                <Label Style="{StaticResource MediumLabel}" Text="{Binding TaskDetail.Time, StringFormat='Time: {0}'}" />
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
+</ContentPage>

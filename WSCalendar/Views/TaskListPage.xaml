@@ -6,38 +6,47 @@
              x:DataType="viewModels:TaskListPageViewModel"
              x:Class="WSCalendar.Views.TaskListPage"
              Title="Task List">
-    
-    <StackLayout>
-        <VerticalStackLayout Margin=" 10"
-                             Padding="10">
-            <Label Text="Tasks" 
-               FontSize="28"
-               VerticalOptions="Center"
-               HorizontalOptions="Center"/>
 
-            <CollectionView ItemsSource="{Binding Tasks}">
+    <Grid ColumnDefinitions="*,*"
+          ColumnSpacing="5"
+          RowDefinitions="*,Auto"
+          RowSpacing="0"
+           BackgroundColor="{AppThemeBinding Light={StaticResource LightBackground}, Dark={StaticResource DarkBackground}}">
+        <RefreshView Command="{Binding GetTaskListCommand}"
+                     IsRefreshing="{Binding IsRefreshing}"
+                     Grid.ColumnSpan="2">
+            <CollectionView ItemsSource="{Binding Tasks}"
+                            SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:TaskReminder">
-                        <Frame >
-                            <StackLayout>
-                                <HorizontalStackLayout Spacing="15">
-                                    <Label Text="{Binding Title}" FontSize="17" FontAttributes="Bold"/>
-                                    <Label Text="{Binding TaskLocation}" FontSize="17" FontAttributes="Bold"/>
-                                    <Label Text="{Binding Description}" FontSize="17" FontAttributes="Bold"/>
-                                </HorizontalStackLayout>
-                            </StackLayout>
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewModels:TaskListPageViewModel}},Path=DisplayActionCommand}"
-                                                      CommandParameter="{Binding .}" />
-                            </Frame.GestureRecognizers>
-                        </Frame>
+                        <Grid Padding="10">
+                            <Frame HeightRequest="70" Style="{StaticResource CardView}">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewModels:TaskListPageViewModel}},Path=DisplayActionCommand}"
+                                                      	  CommandParameter="{Binding .}" />
+                                </Frame.GestureRecognizers>
+                                <Grid Padding="0" ColumnDefinitions="125,*">
+                                    <VerticalStackLayout VerticalOptions="Center"
+                                                         HorizontalOptions="Fill"
+                                                         Grid.Column="1"
+                                                         Padding="10">
+                                        <Label Style="{StaticResource LargeLabel}" Text="{Binding Title}" />
+                                        <Label Style="{StaticResource MediumLabel}" Text="{Binding Date}" />
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Frame>
+                        </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <Button Text="Add Task"
-                    Command="{Binding AddUpdateTaskCommand}"
-                    FontSize="17" 
-                    FontAttributes="Bold"/>
-        </VerticalStackLayout>
-    </StackLayout>
+        </RefreshView>
+
+        <Button Text="Add Task"
+                Command="{Binding AddUpdateTaskCommand}"
+                Grid.Row="1"
+                Grid.Column="0"
+                Style="{StaticResource ButtonOutline}"
+                Margin="8"
+                Grid.ColumnSpan="2"/>
+    </Grid>
 </ContentPage>

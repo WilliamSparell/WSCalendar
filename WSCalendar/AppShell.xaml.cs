@@ -7,5 +7,6 @@ public partial class AppShell : Shell
 		InitializeComponent();
 
 		Routing.RegisterRoute(nameof(AddUpdateTaskDetails), typeof(AddUpdateTaskDetails));
-	}
+        Routing.RegisterRoute(nameof(TaskDetailsPage), typeof(TaskDetailsPage));
+    }
 }

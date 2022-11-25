@@ -15,6 +15,9 @@ namespace WSCalendar.ViewModels
             _calendarService = calendarService;
         }
 
+        [ObservableProperty]
+        bool isRefreshing;
+
         [RelayCommand]
         public async void GetTaskList()
         {
@@ -27,6 +30,7 @@ namespace WSCalendar.ViewModels
                     Tasks.Add(task);
                 }
             }
+            IsRefreshing = false;
         }
 
         [RelayCommand]
@@ -38,12 +42,14 @@ namespace WSCalendar.ViewModels
         [RelayCommand]
         public async void DisplayAction(TaskReminder taskReminder)
         {
-            var response = await AppShell.Current.DisplayActionSheet("Select Option", "OK", null, "Edit", "Delete");
+            var response = await AppShell.Current.DisplayActionSheet("Select Option", "OK", null, "Edit", "Delete", "Details");
 
             if (response is "Edit")
             {
-                var navParam = new Dictionary<string, object>();
-                navParam.Add("TaskDetail", taskReminder);
+                var navParam = new Dictionary<string, object>
+                {
+                    { "TaskDetail", taskReminder }
+                };
 
                 await AppShell.Current.GoToAsync(nameof(AddUpdateTaskDetails), navParam);
             }
@@ -54,6 +60,15 @@ namespace WSCalendar.ViewModels
                 {
                     GetTaskList();
                 }
+            }
+            else if (response is "Details")
+            {
+                var navParam = new Dictionary<string, object>
+                {
+                    { "TaskDetail", taskReminder }
+                };
+
+                await AppShell.Current.GoToAsync(nameof(TaskDetailsPage));
             }
         }
     }

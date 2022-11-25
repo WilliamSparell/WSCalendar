@@ -18,21 +18,31 @@
             <Label Text="Title" />
             <Entry Text="{Binding TaskDetail.Title}"
                Placeholder="Title" />
-            <BoxView HeightRequest="0.8" Color="Gray" />
         </VerticalStackLayout>
 
         <VerticalStackLayout>
             <Label Text="Description" />
             <Entry Text="{Binding TaskDetail.Description}"
                    Placeholder="Description" />
-            <BoxView HeightRequest="0.8" Color="Gray" />
         </VerticalStackLayout>
 
         <VerticalStackLayout>
             <Label Text="Location" />
             <Entry Text="{Binding TaskDetail.TaskLocation}"
                    Placeholder="Location" />
-            <BoxView HeightRequest="0.8" Color="Gray" />
+        </VerticalStackLayout>
+
+        <VerticalStackLayout>
+            <Label Text="Date"/>
+            <DatePicker MinimumDate="{Binding TaskDetail.MinDate}"
+                        MaximumDate="12/31/2024"
+                        Date="{Binding TaskDetails.Date}"
+                        Format="d"/>
+        </VerticalStackLayout>
+
+        <VerticalStackLayout>
+            <Label Text="Date"/>
+            <TimePicker Time="{Binding TaskDetails.Time}"/>
         </VerticalStackLayout>
 
         <Button Text="Save"
