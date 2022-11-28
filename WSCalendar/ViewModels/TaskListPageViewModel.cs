@@ -68,7 +68,7 @@ namespace WSCalendar.ViewModels
                     { "TaskDetail", taskReminder }
                 };
 
-                await AppShell.Current.GoToAsync(nameof(TaskDetailsPage));
+                await AppShell.Current.GoToAsync(nameof(TaskDetailsPage), navParam);
             }
         }
     }
