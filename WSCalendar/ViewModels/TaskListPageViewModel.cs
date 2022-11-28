@@ -1,9 +1,4 @@
-﻿using CommunityToolkit.Mvvm.Input;
-using System.Collections.ObjectModel;
-using WSCalendar.Models;
-using WSCalendar.Services;
-
-namespace WSCalendar.ViewModels
+﻿namespace WSCalendar.ViewModels
 {
     public partial class TaskListPageViewModel : ObservableObject
     {

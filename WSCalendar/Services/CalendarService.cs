@@ -1,9 +1,4 @@
 ﻿using SQLite;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WSCalendar.Models;
 
 namespace WSCalendar.Services
@@ -19,6 +14,7 @@ namespace WSCalendar.Services
                 string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Calendar.db3");
                 _dbConnection = new SQLiteAsyncConnection(dbPath);
                 await _dbConnection.CreateTableAsync<TaskReminder>();
+                await _dbConnection.CreateTableAsync<Calendar>();
             }
         }
 
@@ -45,6 +41,32 @@ namespace WSCalendar.Services
         {
             await SetUpDb();
             return await _dbConnection.UpdateAsync(taskReminder);
+        }
+
+
+        public async Task<List<Calendar>> GetCalendarList()
+        {
+            await SetUpDb();
+            var studentList = await _dbConnection.Table<Calendar>().ToListAsync();
+            return studentList;
+        }
+
+        public async Task<int> AddTask(Calendar calendar)
+        {
+            await SetUpDb();
+            return await _dbConnection.InsertAsync(calendar);
+        }
+
+        public async Task<int> DeleteTask(Calendar calendar)
+        {
+            await SetUpDb();
+            return await _dbConnection.DeleteAsync(calendar);
+        }
+
+        public async Task<int> UpdateTask(Calendar calendar)
+        {
+            await SetUpDb();
+            return await _dbConnection.UpdateAsync(calendar);
         }
     }
 }

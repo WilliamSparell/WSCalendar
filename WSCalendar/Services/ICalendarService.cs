@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WSCalendar.Models;
-
-namespace WSCalendar.Services
+﻿namespace WSCalendar.Services
 {
     public interface ICalendarService
     {
@@ -13,5 +6,11 @@ namespace WSCalendar.Services
         Task<int> AddTask(TaskReminder taskReminder);
         Task<int> DeleteTask(TaskReminder taskReminder);
         Task<int> UpdateTask(TaskReminder taskReminder);
+
+        Task<List<Calendar>> GetCalendarList();
+        Task<int> AddTask(Calendar calendar);
+        Task<int> DeleteTask(Calendar calendar);
+        Task<int> UpdateTask(Calendar calendar);
+
     }
 }

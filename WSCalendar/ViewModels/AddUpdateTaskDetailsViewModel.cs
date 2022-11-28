@@ -1,14 +1,4 @@
-﻿using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WSCalendar.Models;
-using WSCalendar.Services;
-
-namespace WSCalendar.ViewModels
+﻿namespace WSCalendar.ViewModels
 {
     [QueryProperty(nameof(TaskDetail), "TaskDetail")]
     public partial class AddUpdateTaskDetailsViewModel : ObservableObject
