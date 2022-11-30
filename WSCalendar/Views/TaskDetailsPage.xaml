@@ -8,7 +8,6 @@
 
             <Label Style="{StaticResource LargeLabel}" 
                Grid.Row="1"
-               TextColor="White"
                FontAttributes="Bold"
                Text="{Binding TaskDetail.Title}" 
                HorizontalOptions="Center"
