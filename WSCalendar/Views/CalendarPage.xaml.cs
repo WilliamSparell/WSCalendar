@@ -1,10 +1,9 @@
 namespace WSCalendar.Views;
 
-public partial class CalendarPage : ContentPage
+public partial class CalendarPage : StackLayout
 {
-	public CalendarPage(CalendarPageViewModel viewModel)
+	public CalendarPage()
 	{
 		InitializeComponent();
-		this.BindingContext = viewModel;
 	}
 }

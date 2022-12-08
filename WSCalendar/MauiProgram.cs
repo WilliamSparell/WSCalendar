@@ -18,12 +18,12 @@ public static class MauiProgram
         builder.Services.AddSingleton<TaskListPage>();
         builder.Services.AddSingleton<AddUpdateTaskDetails>();
         builder.Services.AddSingleton<TaskDetailsPage>();
-        builder.Services.AddSingleton<CalendarPage>();
+        //builder.Services.AddSingleton<CalendarPage>();
 
         builder.Services.AddSingleton<TaskListPageViewModel>();
         builder.Services.AddSingleton<AddUpdateTaskDetailsViewModel>();
         builder.Services.AddSingleton<TaskDetailsPageViewModel>();
-        builder.Services.AddSingleton<CalendarPageViewModel>();
+        //builder.Services.AddSingleton<CalendarPageViewModel>();
 
         return builder.Build();
     }
