@@ -25,7 +25,7 @@
     
     <ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate views:TaskListPage}"
+        ContentTemplate="{DataTemplate views:CalendarPage}"
         Route="MainPage" />
 
 </Shell>

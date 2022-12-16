@@ -21,6 +21,8 @@ public partial class CalendarPage : ContentView
 		set => SetValue(SelectedDateProperty, value);
 	}
 
+	private DateTime _tempDate;
+
 	public ObservableCollection<CalendarModel> Dates = new();
 	public CalendarPage()
 	{
@@ -28,20 +30,45 @@ public partial class CalendarPage : ContentView
 		BindDates(DateTime.Now);
 	}
 
-	private void BindDates(DateTime selectedDate)
+	private void BindDates(DateTime date)
 	{
-		int daysCount = DateTime.DaysInMonth(selectedDate.Year, selectedDate.Month);
+		Dates.Clear();
+
+		int daysCount = DateTime.DaysInMonth(date.Year, date.Month);
+
 		for (int days = 1; days < daysCount; days++)
 		{
 			Dates.Add(new CalendarModel
 			{
-				Date = new DateTime(selectedDate.Year, selectedDate.Month, selectedDate.Day)
+				Date = new DateTime(date.Year, date.Month, date.Day)
 			});
+		}
+
+		var selectedDate = Dates.Where(f => f.Date.Date == SelectedDate.Date).FirstOrDefault();
+		if (selectedDate != null)
+		{
+			selectedDate.IsCurrentDate = true;
+			_tempDate = selectedDate.Date;
 		}
 	}
 
 	public ICommand CurrentDateCommand => new Command<CalendarModel>((currentDate) =>
 	{
+		_tempDate = currentDate.Date;
 		SelectedDate = currentDate.Date;
+		Dates.ToList().ForEach(f => f.IsCurrentDate = false);
+		currentDate.IsCurrentDate = true;
 	});
+
+	public ICommand NextMonthCommand => new Command(() =>
+	{
+		_tempDate = _tempDate.AddMonths(1);
+		BindDates(_tempDate);
+	});
+
+    public ICommand PreviousMonthCommand => new Command(() =>
+    {
+        _tempDate = _tempDate.AddMonths(-1);
+        BindDates(_tempDate);
+    });
 }
