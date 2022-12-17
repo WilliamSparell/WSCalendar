@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:WSCalendar.Models"
              x:Name="this"
-             x:Class="WSCalendar.Views.CalendarPage">
+             x:Class="WSCalendar.CustomCalendar.CalendarPage">
 
-    <Grid>
-        <Grid.ColumnDefinitions>
+    <!--<Grid>-->
+        <!--<Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
@@ -24,9 +24,9 @@
                     <TapGestureRecognizer Command="{Binding Source={x:Reference this}, Path=NextMonthCommand}"/>
                 </Image.GestureRecognizers>
             </Image>
-        </HorizontalStackLayout>
+        </HorizontalStackLayout>-->
     
-    
+        
     
         <CollectionView ItemsSource="{Binding Source={x:Reference this}, Path=Dates}">
             <CollectionView.ItemsLayout>
@@ -71,5 +71,5 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-    </Grid>
+    <!--</Grid>-->
 </ContentView>

@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using WSCalendar.Models;
 
-namespace WSCalendar.Views;
+namespace WSCalendar.CustomCalendar;
 
 public partial class CalendarPage : ContentView
 {
