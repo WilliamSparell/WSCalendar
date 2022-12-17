@@ -5,6 +5,6 @@
              x:Class="WSCalendar.Views.CalendarView"
              Title="CalendarView">
     <VerticalStackLayout>
-        <calendarControls:CalendarPage />
+        <calendarControls:CalendarPage x:Name="cal" OnDateSelected="cal_OnDateSelected"/>
     </VerticalStackLayout>
 </ContentPage>

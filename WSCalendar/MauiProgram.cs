@@ -17,16 +17,8 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
-        builder.Services.AddSingleton<ICalendarService, CalendarService>();
-
-        builder.Services.AddSingleton<TaskListPage>();
-        builder.Services.AddSingleton<AddUpdateTaskDetails>();
-        builder.Services.AddSingleton<TaskDetailsPage>();
         builder.Services.AddSingleton<CalendarView>();
 
-        builder.Services.AddSingleton<TaskListPageViewModel>();
-        builder.Services.AddSingleton<AddUpdateTaskDetailsViewModel>();
-        builder.Services.AddSingleton<TaskDetailsPageViewModel>();
 
 
         return builder.Build();

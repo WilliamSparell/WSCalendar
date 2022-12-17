@@ -12,8 +12,32 @@ public partial class CalendarPage : StackLayout
 		typeof(DateTime),
 		declaringType: typeof(CalendarPage),
 		defaultBindingMode: BindingMode.TwoWay,
-		defaultValue: DateTime.Now
+		defaultValue: DateTime.Now,
+		propertyChanged: SelectedItemChanged
 		);
+
+	private static void SelectedItemChanged(BindableObject bindable, object oldValue, object newValue)
+	{
+		var controls = (CalendarPage)bindable;
+		if (newValue != null)
+		{
+			var newDate = (DateTime)newValue;
+
+			if (controls._tempDate.Month == newDate.Month && controls._tempDate.Year == newDate.Year)
+			{
+				var currentDate = controls.Dates.Where(f => f.Date == newDate.Date).FirstOrDefault();
+				if (currentDate != null)
+				{
+					controls.Dates.ToList().ForEach(f => f.IsCurrentDate = false);
+					currentDate.IsCurrentDate = true;
+				}
+			}
+			else
+			{
+                controls.BindDates(newDate);
+            }
+		}
+	}
 
 	public DateTime SelectedDate
 	{
@@ -21,9 +45,22 @@ public partial class CalendarPage : StackLayout
 		set => SetValue(SelectedDateProperty, value);
 	}
 
-	private DateTime _tempDate;
+    public static readonly BindableProperty SelectedDateCommandProperty = BindableProperty.Create(
+        nameof(SelectedDateCommand),
+        typeof(ICommand),
+        declaringType: typeof(CalendarPage)
+        );
 
-	public ObservableCollection<CalendarModel> Dates = new();
+    public ICommand SelectedDateCommand
+    {
+        get => (ICommand)GetValue(SelectedDateCommandProperty);
+        set => SetValue(SelectedDateCommandProperty, value);
+    }
+
+	public event EventHandler<DateTime> OnDateSelected;
+    private DateTime _tempDate;
+
+	public ObservableCollection<CalendarModel> Dates { get; set; } = new();
 	public CalendarPage()
 	{
 		InitializeComponent();
@@ -40,7 +77,7 @@ public partial class CalendarPage : StackLayout
 		{
 			Dates.Add(new CalendarModel
 			{
-				Date = new DateTime(date.Year, date.Month, date.Day)
+				Date = new DateTime(date.Year, date.Month, days)
 			});
 		}
 
@@ -56,9 +93,10 @@ public partial class CalendarPage : StackLayout
 	{
 		_tempDate = currentDate.Date;
 		SelectedDate = currentDate.Date;
-		Dates.ToList().ForEach(f => f.IsCurrentDate = false);
-		currentDate.IsCurrentDate = true;
-	});
+		OnDateSelected?.Invoke(null, currentDate.Date);
+		SelectedDateCommand?.Execute(currentDate.Date);
+
+    });
 
 	public ICommand NextMonthCommand => new Command(() =>
 	{

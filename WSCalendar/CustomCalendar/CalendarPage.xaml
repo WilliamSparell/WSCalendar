@@ -35,7 +35,7 @@
         </CollectionView.ItemsLayout>
         <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="models:CalendarModel">
-                <Border>
+                <Border WidthRequest="100">
                     <VerticalStackLayout>
                         <Label Text="{Binding Date, StringFormat='{0:ddd}'}" 
                                    FontSize="18"
