@@ -5,7 +5,7 @@ using WSCalendar.Models;
 
 namespace WSCalendar.CustomCalendar;
 
-public partial class CalendarPage : ContentView
+public partial class CalendarPage : StackLayout
 {
 	public static readonly BindableProperty SelectedDateProperty = BindableProperty.Create(
 		nameof(SelectedDate),
